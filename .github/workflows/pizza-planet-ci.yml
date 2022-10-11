@@ -33,7 +33,7 @@ jobs:
 
     - name: Autoformatter with autopep8
       run: |
-        autopep8 --in-place --aggressive --aggresive **/*.py
+        autopep8 --in-place --aggressive --aggressive **/*.py
 
     - name: Lint with flake8
       run: |
