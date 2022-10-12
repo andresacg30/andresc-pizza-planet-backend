@@ -6,10 +6,11 @@ This is an example software for a pizzeria that takes customizable orders.
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Getting started](#getting-started)
 - [Running the backend project](#running-the-backend-project)
 - [Running the frontend](#running-the-frontend)
-- [Testing the backend](#testing-the-backend)
+  - [Testing the backend](#testing-the-backend)
 
 ## Getting started
 
@@ -23,7 +24,7 @@ You will need the following general tools:
 
 ## Running the backend project
 
-- Clone the repo
+- Clone the repository
 
 ```bash
 git clone https://github.com/ioet/python-pizza-planet.git
