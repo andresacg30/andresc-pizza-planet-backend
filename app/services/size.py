@@ -1,38 +1,32 @@
 from app.common.http_methods import GET, POST, PUT
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 
 from ..controllers import SizeController
+from .base_response import BaseResponse
 
 size = Blueprint('size', __name__)
+size_response = BaseResponse(SizeController)
 
 
 @size.route('/', methods=POST)
 def create_size():
-    size, error = SizeController.create(request.json)
-    response = size if not error else {'error': error}
-    status_code = 200 if not error else 400
-    return jsonify(response), status_code
+    response = size_response.controller.create(request.json)
+    return size_response.get_jsonify_response(response)
 
 
 @size.route('/', methods=PUT)
 def update_size():
-    size, error = SizeController.update(request.json)
-    response = size if not error else {'error': error}
-    status_code = 200 if not error else 400
-    return jsonify(response), status_code
+    response = size_response.controller.update(request.json)
+    return size_response.get_jsonify_response(response)
 
 
 @size.route('/id/<_id>', methods=GET)
 def get_size_by_id(_id: int):
-    size, error = SizeController.get_by_id(_id)
-    response = size if not error else {'error': error}
-    status_code = 200 if size else 404 if not error else 400
-    return jsonify(response), status_code
+    response = size_response.controller.get_by_id(_id)
+    return size_response.get_jsonify_response(response)
 
 
 @size.route('/', methods=GET)
 def get_sizes():
-    sizes, error = SizeController.get_all()
-    response = sizes if not error else {'error': error}
-    status_code = 200 if sizes else 404 if not error else 400
-    return jsonify(response), status_code
+    response = size_response.controller.get_all()
+    return size_response.get_jsonify_response(response)
