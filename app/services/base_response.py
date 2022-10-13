@@ -20,6 +20,6 @@ class BaseResponse:
 
     def get_jsonify_response(self, request: tuple):
         self.controller_request, self.error = request
-        self.receive_response()
+        self.send_request()
         self.get_status_code()
         return self.jsonify_response()
