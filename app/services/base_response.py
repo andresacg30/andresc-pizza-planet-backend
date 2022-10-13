@@ -7,7 +7,7 @@ class BaseResponse:
     def __init__(self, controller: BaseController):
         self.controller = controller
 
-    def receive_response(self):
+    def send_request(self):
         self.response = (
             self.controller_request if not self.error else {"error": self.error}
         )
