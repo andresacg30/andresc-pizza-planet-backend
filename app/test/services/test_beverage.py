@@ -16,3 +16,12 @@ def test_update_beverage_service(client, create_beverage, beverage_uri):
     update_data = {**current_beverage, 'name': get_random_string(), 'price': get_random_price(2, 7)}
     response = client.put(beverage_uri, json=update_data)
     pytest.assume(response.status.startswith('200'))
+    updated_beverage = response.json
+    for param, value in update_data.items():
+        pytest.assume(updated_beverage[param] == value)
+
+
+def test_get_beverage_by_id_service(client, create_beverage, beverage_uri):
+    current_beverage = create_beverage.json
+    response = client.get(f'{beverage_uri}id/{current_beverage["_id"]}')
+    pytest.assume(response.status.startswith('200'))
