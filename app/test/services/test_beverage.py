@@ -25,3 +25,8 @@ def test_get_beverage_by_id_service(client, create_beverage, beverage_uri):
     current_beverage = create_beverage.json
     response = client.get(f'{beverage_uri}id/{current_beverage["_id"]}')
     pytest.assume(response.status.startswith('200'))
+
+
+def test_get_beverages_service(client, create_beverages, beverage_uri):
+    response = client.get(beverage_uri)
+    pytest.assume(response.status.startswith('200'))
