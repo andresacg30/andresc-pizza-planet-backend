@@ -22,7 +22,7 @@ def beverage():
 
 @pytest.fixture
 def beverages():
-    return [beverage_mock() for _ in range(5)]
+    return [beverage_mock() for _ in range(2)]
 
 
 @pytest.fixture
