@@ -15,7 +15,7 @@ def create_beverage():
 
 
 @beverage.route('/', methods=PUT)
-def update_ingredient():
+def update_beverage():
     response = BeverageController.update(request.json)
     return response_builder(response)
 
@@ -23,4 +23,10 @@ def update_ingredient():
 @beverage.route('/id/<_id>', methods=GET)
 def get_beverage_by_id(_id: int):
     response = BeverageController.get_by_id(_id)
+    return response_builder(response)
+
+
+@beverage.route('/', methods=GET)
+def get_beverages():
+    response = BeverageController.get_all()
     return response_builder(response)
