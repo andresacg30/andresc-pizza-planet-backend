@@ -65,7 +65,8 @@ def test_calculate_order_price(app, ingredients, size, beverages, client_data):
 
 
 def test_get_by_id(app, ingredients, size, beverages, client_data):
-    created_size, created_ingredients, created_beverages = __create_sizes_beverages_and_ingredients(ingredients, [size], beverages)
+    created_size, created_ingredients, created_beverages = __create_sizes_beverages_and_ingredients(
+                                                            ingredients, [size], beverages)
     order = __order(created_ingredients, created_beverages, created_size, client_data)
     created_order, _ = OrderController.create(order)
     order_from_db, error = OrderController.get_by_id(created_order['_id'])
