@@ -31,7 +31,6 @@ class BaseSeeder(ABC):
             self.db.session.add(item)
 
 
-
 class IngredientTemplate(BaseSeeder):
 
     possible_items = ['Tomato', 'Bacon', 'Pepperoni', 'Corn', 'Meat', 'Mushrooms']
@@ -57,7 +56,18 @@ class IngredientSeeder(IngredientTemplate, Seeder):
 
 class BeverageTemplate(BaseSeeder):
 
-    pass
+    possible_items = ['Sprite', 'Natural Juice', 'CocaCola', 'Water', 'Beer', 'Ice Tea']
+
+    def generate_info(self) -> None:
+        faker = Faker(
+            cls=Ingredient,
+            init={
+                "_id": generator.Sequence(end=len(self.possible_items)),
+                "name": ListSequence(self.possible_items),
+                "price": generator.Integer(start=3, end=7)
+            }
+        )
+        self.faker = faker
 
 
 class BeverageSeeder(BeverageTemplate, Seeder):
