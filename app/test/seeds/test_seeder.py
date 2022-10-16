@@ -1,15 +1,13 @@
 import pytest
 
-from app.seeds import IngredientSeeder, BeverageSeeder
+from app.seeds import IngredientTemplate, BeverageTemplate
 from app.controllers.ingredient import IngredientController
 from app.controllers.beverage import BeverageController
 
 
 def test_seeder_create_ingredients_in_db(app):
-    seeder = IngredientSeeder()
-    seeder.generate_info()
-    seeder.get_data()
-    data = seeder.data_to_add
+    seeder = IngredientTemplate()
+    data = seeder.test_seeder()
     data_from_seeder = []
     for item in data:
         item = {'name': item.name, 'price': item.price}
@@ -24,10 +22,8 @@ def test_seeder_create_ingredients_in_db(app):
 
 
 def test_seeder_create_beverages_in_db(app):
-    seeder = BeverageSeeder()
-    seeder.generate_info()
-    seeder.get_data()
-    data = seeder.data_to_add
+    seeder = BeverageTemplate()
+    data = seeder.test_seeder()
     data_from_seeder = []
     for item in data:
         item = {'name': item.name, 'price': item.price}
