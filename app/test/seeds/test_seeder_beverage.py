@@ -13,7 +13,10 @@ def test_seeder_create_beverages_in_db(app):
         created_beverage, _ = BeverageController.create(item)
         data_from_seeder.append(created_beverage)
     pytest.assume(len(data) != 0)
-    possible_beverages = ['Sprite', 'Natural Juice', 'CocaCola', 'Water', 'Beer', 'Ice Tea']
+    possible_beverages = [
+        'Sprite', 'Orange Juice', 'CocaCola', 'Water', 'Beer', 'Ice Tea',
+        'Apple Juice', 'Fanta', 'Dr. Pepper', 'Chocolate Milk', 'Wine'
+        ]
     data_in_db, error = BeverageController.get_all()
     pytest.assume(error is None)
     pytest.assume(len(data_in_db) != 0)
