@@ -3,6 +3,7 @@ import pytest
 from app.seeds import IngredientTemplate, BeverageTemplate
 from app.controllers.ingredient import IngredientController
 from app.controllers.beverage import BeverageController
+from app.controllers.size import SizeController
 
 
 def test_seeder_create_ingredients_in_db(app):
@@ -36,3 +37,15 @@ def test_seeder_create_beverages_in_db(app):
     pytest.assume(len(data_in_db) != 0)
     for ingredient in data_in_db:
         pytest.assume(ingredient['name'] in possible_beverages)
+
+
+def test_seeder_create_sizes_in_db(app):
+    seeder = SizesTemplate()
+    data = seeder.test_seeder()
+    data_from_seeder = []
+    for item in data:
+        item = {'name': item.name, 'price': item.price}
+        created_beverage, _ = SizeController.create(item)
+        data_from_seeder.append(created_beverage)
+    pytest.assume(len(data) != 0)
+
