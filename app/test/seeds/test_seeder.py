@@ -20,3 +20,11 @@ def test_seeder_create_ingredients_in_db(app):
     pytest.assume(len(data_in_db) != 0)
     for ingredient in data_in_db:
         pytest.assume(ingredient['name'] in possible_ingredients)
+
+
+def test_seeder_create_beverages_in_db(app):
+    seeder = BeverageSeeder()
+    seeder.generate_info()
+    seeder.get_data()
+    data = seeder.data_to_add
+
