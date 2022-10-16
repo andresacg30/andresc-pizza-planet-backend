@@ -27,4 +27,4 @@ def test_seeder_create_beverages_in_db(app):
     seeder.generate_info()
     seeder.get_data()
     data = seeder.data_to_add
-
+    pytest.assume(len(data) != 0)

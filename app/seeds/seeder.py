@@ -60,7 +60,7 @@ class BeverageTemplate(BaseSeeder):
     pass
 
 
-class BeverageSeeder(IngredientTemplate, Seeder):
+class BeverageSeeder(BeverageTemplate, Seeder):
 
     def run(self):
         self.template_seed()
