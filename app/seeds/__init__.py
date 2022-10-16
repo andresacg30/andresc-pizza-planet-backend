@@ -1,1 +1,1 @@
-from .seeder import IngredientSeeder
+from .seeder import IngredientSeeder, BeverageSeeder

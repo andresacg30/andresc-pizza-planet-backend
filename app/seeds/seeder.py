@@ -31,6 +31,7 @@ class BaseSeeder(ABC):
             self.db.session.add(item)
 
 
+
 class IngredientTemplate(BaseSeeder):
 
     possible_items = ['Tomato', 'Bacon', 'Pepperoni', 'Corn', 'Meat', 'Mushrooms']
@@ -48,6 +49,18 @@ class IngredientTemplate(BaseSeeder):
 
 
 class IngredientSeeder(IngredientTemplate, Seeder):
+
+    def run(self):
+        self.template_seed()
+        return self.data_to_add
+
+
+class BeverageTemplate(BaseSeeder):
+
+    pass
+
+
+class BeverageSeeder(IngredientTemplate, Seeder):
 
     def run(self):
         self.template_seed()

@@ -1,6 +1,6 @@
 import pytest
 
-from app.seeds import IngredientSeeder
+from app.seeds import IngredientSeeder, BeverageSeeder
 from app.controllers.ingredient import IngredientController
 
 
