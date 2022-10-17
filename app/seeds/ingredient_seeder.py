@@ -11,6 +11,7 @@ class IngredientTemplate(BaseSeeder):
         'Tomato', 'Bacon', 'Pepperoni', 'Corn', 'Meat', 'Mushrooms',
         'Pinnapple', 'Onion', 'Cheese', 'Spinach', 'Anchovies', 'Garlic'
         ]
+    number_of_items: int = 12
 
     def generate_info(self) -> None:
         faker = Faker(

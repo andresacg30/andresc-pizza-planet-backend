@@ -11,6 +11,7 @@ class BeverageTemplate(BaseSeeder):
         'Sprite', 'Orange Juice', 'CocaCola', 'Water', 'Beer', 'Ice Tea',
         'Apple Juice', 'Fanta', 'Dr. Pepper', 'Chocolate Milk', 'Wine'
         ]
+    number_of_items: int = 11
 
     def generate_info(self) -> None:
         faker = Faker(

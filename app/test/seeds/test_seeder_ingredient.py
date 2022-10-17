@@ -4,14 +4,15 @@ from app.seeds import IngredientTemplate
 from app.controllers.ingredient import IngredientController
 
 
-def test_seeder_create_ingredients_in_db(app):
+def test_ingredient_seeder_creates_ingredients_in_db(app):
     seeder = IngredientTemplate()
-    data = seeder.test_seeder()
+    data = seeder.data_to_list()
     data_from_seeder = []
     for item in data:
         item = {'name': item.name, 'price': item.price}
         created_ingredient, _ = IngredientController.create(item)
         data_from_seeder.append(created_ingredient)
+    pytest.assume(len(data) != 0)
     possible_ingredients = [
         'Tomato', 'Bacon', 'Pepperoni', 'Corn', 'Meat', 'Mushrooms',
         'Pinnapple', 'Onion', 'Cheese', 'Spinach', 'Anchovies', 'Garlic'
