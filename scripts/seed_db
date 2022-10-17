@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Seed database with fake data
+python3 manage.py seed run --root app/seeds
