@@ -1,6 +1,7 @@
 from typing import Any, List, Optional, Sequence
 
 from sqlalchemy.sql import text, column
+from sqlalchemy import func, desc
 
 from .models import Beverage, Ingredient, Order, OrderDetail, Size, db
 from .serializers import BeverageSerializer, IngredientSerializer, OrderSerializer, SizeSerializer, ma
@@ -99,3 +100,47 @@ class BeverageManager(BaseManager):
         return (
             cls.session.query(cls.model).filter(cls.model._id.in_(set(ids))).all() or []
         )
+
+
+class ReportManager(BaseManager):
+
+    @classmethod
+    def get_top_clients(cls):
+        limit = 3
+        query = cls.session.query(
+            Order.client_name,
+            func.sum(Order.total_price).label('total')
+        ).group_by(Order.client_name).order_by(desc('total')).limit(limit).all()
+        return list(map(lambda x: {'client_name': x[0], 'amount_spent': x[1]}, query))
+
+    @classmethod
+    def get_month_with_most_revenue(cls):
+        query = cls.session.query(
+            func.strftime('%Y-%m', Order.date).label('month'),
+            func.sum(Order.total_price).label('amount')
+        ).group_by('month').order_by(desc('amount')).first()
+
+        if not query:
+            return
+
+        month, amount = query
+        return {
+            'month': month,
+            'amount': amount
+        }
+
+    @classmethod
+    def get_most_requested_ingredient(cls):
+        query = cls.session.query(
+            OrderDetail.ingredient_id, func.count(OrderDetail.ingredient_id).label('qty')
+        ).group_by(OrderDetail.ingredient_id).order_by(desc('qty')).first()
+
+        if not query:
+            return
+
+        most_requested_ingredient_id, quantity = query
+        most_requested_ingredient_id = IngredientManager.get_by_id(most_requested_ingredient_id)
+        return {
+            'ingredient': most_requested_ingredient_id,
+            'quantity': quantity
+        }
